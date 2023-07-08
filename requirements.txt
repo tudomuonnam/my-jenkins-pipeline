@@ -1,3 +1,4 @@
+uvicorn==0.20.0
 annotated-types==0.5.0
 anyio==3.7.1
 exceptiongroup==1.1.2
