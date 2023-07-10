@@ -1,30 +1,33 @@
-services:
+# Now move to docker-compose.yml
 
-  backends:
-    build: ./
-    restart: always
-    container_name: fastapi
-    security_opt:
-      - no-new-privileges:true
-    labels:
-      # enable traefik for this service
-      - traefik.enable=true
-       # Define the network that should be used
-      - "traefik.docker.network=proxy"
-      # URL to reach this container
-      - "traefik.http.routers.fastapi.rule=Host(`fastapi.docker.localhost`)"
-      # Activation of TLS
-      - "traefik.http.routers.fastapi.tls=true"
+# services:
 
-      # define port inside the docker service
-      #- traefik.http.service.app.loadbalancer.server.port=443
-      # Maker traefik use this domain in HTTP
-      #- traefik.http.route.app-http.entrypoints=http
-      #- traefik.http.route.app-http.rules=Host(http://localhost)
-    ports:
-      - "3000:3000"
-    networks:
-      - proxy
-networks:
-  proxy:
-    external: true
+#   backends:
+#     build: ./
+#     restart: always
+#     container_name: fastapi
+#     security_opt:
+#       - no-new-privileges:true
+#     labels:
+#       # enable traefik for this service
+#       - traefik.enable=true
+#        # Define the network that should be used
+#       - "traefik.docker.network=proxy"
+#       # URL to reach this container
+#       - "traefik.http.routers.fastapi.rule=Host(`fastapi.docker.localhost`)"
+#       # Activation of TLS
+#       - "traefik.http.routers.fastapi.tls=true"
+#       # Another directory
+#       #- traefik.http.routers.fastapi.rule=Host(`localhost`) && Path(`/fastapi`)
+#       # define port inside the docker service
+#       #- traefik.http.service.app.loadbalancer.server.port=443
+#       # Maker traefik use this domain in HTTP
+#       #- traefik.http.route.app-http.entrypoints=http
+#       #- traefik.http.route.app-http.rules=Host(http://localhost)
+#     ports:
+#       - "3000:3000"
+#     networks:
+#       - proxy
+# networks:
+#   proxy:
+#     external: true

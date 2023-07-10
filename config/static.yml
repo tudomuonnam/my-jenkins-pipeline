@@ -16,8 +16,9 @@ providers:
     watch: true
 
 log:
-  level: INFO
+  level: DEBUG
   format: common
+  filePath: "/var/log/traefik/access.log"
 
 entryPoints:
   http:
@@ -29,3 +30,9 @@ entryPoints:
           scheme: https
   https:
     address: ":443"
+
+# acme:
+#   email: "doluong2007@gmail.com"
+#   storage: "acme.json"
+#   entryPoint: "https"
+#   OnHostRule: "true"

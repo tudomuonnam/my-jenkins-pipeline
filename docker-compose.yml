@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  reverse-proxy:
+  traefik:
     image: traefik:v2.5
     container_name: traefik
     restart: unless-stopped
@@ -18,8 +18,31 @@ services:
       - ./config/static.yml:/etc/traefik/traefik.yml:ro
       # Map the dynamic configuration into the container
       - ./config/dynamic.yml:/etc/traefik/dynamic.yml:ro
+      # logfile
+      - "./logs/:/var/log/traefik/"
+      # Map the dynamic configuration into the container
+  #    - ./config/acme.json:/acme.json
       # Map the certificats into the container
       - ./certs:/etc/certs:ro
+    networks:
+      - proxy
+  backends:
+    build: ./
+    restart: always
+    container_name: fastapi
+    security_opt:
+      - no-new-privileges:true
+    labels:
+      # enable traefik for this service
+      - traefik.enable=true
+       # Define the network that should be used
+      - "traefik.docker.network=proxy"
+      # URL to reach this container 
+      - "traefik.http.routers.fastapi.rule=Host(`fastapi.docker.localhost`)"
+      # Activation of TLS
+      - "traefik.http.routers.fastapi.tls=true"
+    ports:
+      - "3000:3000"
     networks:
       - proxy
   

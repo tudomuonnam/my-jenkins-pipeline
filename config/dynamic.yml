@@ -11,6 +11,17 @@ http:
           - main: "domain.local"
             sans:
               - "*.domain.local"
+    router0:
+      entryPoints:
+      - web
+      service: apiserver
+      rule: Path('/api')
+    services:
+      apiserver:
+        loadBalancer:
+          servers:
+          - url: http://localhost:3000
+
 
 tls:
   certificates:
