@@ -1,42 +1,42 @@
 
-pipeline{
-    agent any
-    {
-  stage('SCM') {
-    checkout scm
-}
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarScanner';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
-}}
-
-
 // pipeline{
-//     environment {
-//         registry = 'kaisbettaieb/fastapi-example'
-//         registryCredential = 'dockerhub-credentials'
-//         dockerImage = ''
-//         scannerHome = tool 'SonarQube scanner'
-//         sonarToken = credentials('credentials-sonar')
-//         build_version = "1+${BUILD_NUMBER}"
-//     }
 //     agent any
+//     {
+//   stage('SCM') {
+//     checkout scm
+// }
+//   stage('SonarQube Analysis') {
+//     def scannerHome = tool 'SonarScanner';
+//     withSonarQubeEnv() {
+//       sh "${scannerHome}/bin/sonar-scanner"
+//     }
+//   }
+// }}
 
-//     stages {
-//         stage('Clone github repo'){
-//             steps {
-//                 git credentialsId: 'github-credentials', url: 'https://github.com/kaisbettaieb/fastapi-examle', branch: 'main'
-//             }
-//         }
 
-//         stage('Setup') {
-//             steps {
-//                 sh 'pip install -r requirements.txt --user'
-//             }
-//         }
+pipeline{
+    environment {
+        // registry = 'tudomuonnam/my-jenkins-pipeline'
+        // registryCredential = 'dockerhub-credentials'
+        // dockerImage = ''
+        scannerHome = tool 'SonarQube scanner'
+        sonarToken = credentials('credentials-sonar')
+        build_version = "1+${BUILD_NUMBER}"
+    }
+    agent any
+
+    stages {
+        stage('Clone github repo'){
+            steps {
+                git credentialsId: 'github', url: 'https://github.com/tudomuonnam/my-jenkins-pipeline', branch: 'master'
+            }
+        }
+
+        stage('Setup') {
+            steps {
+                sh 'pip install -r requirements.txt --user'
+            }
+        }
 
 //         stage('Unit testing') {
 //             steps {
