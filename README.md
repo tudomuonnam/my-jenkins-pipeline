@@ -31,4 +31,4 @@ Next:
 # Reference:
 1. [traefik-examples](https://github.com/JensKnipper/traefik-examples)
 2. [traefik-v2-https-ssl-localhost](https://github.com/Heziode/traefik-v2-https-ssl-localhost.git)
-3. 
+3. [Jenkinsfile template for Fastapi](https://github.com/kaisbettaieb/fastapi-examle/blob/main/Jenkinsfile)

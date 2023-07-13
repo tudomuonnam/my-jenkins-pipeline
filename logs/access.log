@@ -94,3 +94,74 @@ time="2023-07-10T03:33:45Z" level=debug msg="Entry point http closed" entryPoint
 time="2023-07-10T03:33:45Z" level=debug msg="Entry point https closed" entryPointName=https
 time="2023-07-10T03:33:45Z" level=info msg="Server stopped"
 time="2023-07-10T03:33:45Z" level=info msg="Shutting down"
+time="2023-07-11T07:49:31Z" level=info msg="Traefik version 2.5.7 built on 2022-01-20T16:16:23Z"
+time="2023-07-11T07:49:31Z" level=debug msg="Static configuration loaded {\"global\":{\"checkNewVersion\":true},\"serversTransport\":{\"maxIdleConnsPerHost\":200},\"entryPoints\":{\"http\":{\"address\":\":80\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{\"redirections\":{\"entryPoint\":{\"to\":\"https\",\"scheme\":\"https\",\"permanent\":true,\"priority\":2147483646}}},\"udp\":{\"timeout\":\"3s\"}},\"https\":{\"address\":\":443\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"udp\":{\"timeout\":\"3s\"}},\"traefik\":{\"address\":\":8080\",\"transport\":{\"lifeCycle\":{\"graceTimeOut\":\"10s\"},\"respondingTimeouts\":{\"idleTimeout\":\"3m0s\"}},\"forwardedHeaders\":{},\"http\":{},\"udp\":{\"timeout\":\"3s\"}}},\"providers\":{\"providersThrottleDuration\":\"2s\",\"docker\":{\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"},\"file\":{\"watch\":true,\"filename\":\"/etc/traefik/dynamic.yml\"}},\"api\":{\"insecure\":true,\"dashboard\":true},\"log\":{\"level\":\"DEBUG\",\"filePath\":\"/var/log/traefik/access.log\",\"format\":\"common\"},\"pilot\":{\"dashboard\":true}}"
+time="2023-07-11T07:49:31Z" level=info msg="\nStats collection is disabled.\nHelp us improve Traefik by turning this feature on :)\nMore details on: https://doc.traefik.io/traefik/contributing/data-collection/\n"
+time="2023-07-11T07:49:31Z" level=info msg="Starting provider aggregator.ProviderAggregator {}"
+time="2023-07-11T07:49:31Z" level=debug msg="Start TCP Server" entryPointName=http
+time="2023-07-11T07:49:31Z" level=debug msg="Start TCP Server" entryPointName=https
+time="2023-07-11T07:49:31Z" level=debug msg="Start TCP Server" entryPointName=traefik
+time="2023-07-11T07:49:31Z" level=info msg="Starting provider *file.Provider {\"watch\":true,\"filename\":\"/etc/traefik/dynamic.yml\"}"
+time="2023-07-11T07:49:31Z" level=error msg="Cannot start the provider *file.Provider: field not found, node: apiserver"
+time="2023-07-11T07:49:31Z" level=info msg="Starting provider *traefik.Provider {}"
+time="2023-07-11T07:49:31Z" level=info msg="Starting provider *acme.ChallengeTLSALPN {\"Timeout\":4000000000}"
+time="2023-07-11T07:49:31Z" level=debug msg="Configuration received from provider internal: {\"http\":{\"routers\":{\"api\":{\"entryPoints\":[\"traefik\"],\"service\":\"api@internal\",\"rule\":\"PathPrefix(`/api`)\",\"priority\":2147483646},\"dashboard\":{\"entryPoints\":[\"traefik\"],\"middlewares\":[\"dashboard_redirect@internal\",\"dashboard_stripprefix@internal\"],\"service\":\"dashboard@internal\",\"rule\":\"PathPrefix(`/`)\",\"priority\":2147483645},\"http-to-https\":{\"entryPoints\":[\"http\"],\"middlewares\":[\"redirect-http-to-https\"],\"service\":\"noop@internal\",\"rule\":\"HostRegexp(`{host:.+}`)\",\"priority\":2147483646}},\"services\":{\"api\":{},\"dashboard\":{},\"noop\":{}},\"middlewares\":{\"dashboard_redirect\":{\"redirectRegex\":{\"regex\":\"^(http:\\\\/\\\\/(\\\\[[\\\\w:.]+\\\\]|[\\\\w\\\\._-]+)(:\\\\d+)?)\\\\/$\",\"replacement\":\"${1}/dashboard/\",\"permanent\":true}},\"dashboard_stripprefix\":{\"stripPrefix\":{\"prefixes\":[\"/dashboard/\",\"/dashboard\"]}},\"redirect-http-to-https\":{\"redirectScheme\":{\"scheme\":\"https\",\"port\":\"443\",\"permanent\":true}}},\"serversTransports\":{\"default\":{\"maxIdleConnsPerHost\":200}}},\"tcp\":{},\"tls\":{}}" providerName=internal
+time="2023-07-11T07:49:31Z" level=info msg="Starting provider *docker.Provider {\"watch\":true,\"endpoint\":\"unix:///var/run/docker.sock\",\"defaultRule\":\"Host(`{{ normalize .Name }}`)\",\"swarmModeRefreshSeconds\":\"15s\"}"
+time="2023-07-11T07:49:31Z" level=debug msg="No default certificate, generating one" tlsStoreName=default
+time="2023-07-11T07:49:31Z" level=debug msg="Provider connection established with docker 24.0.2 (API 1.43)" providerName=docker
+time="2023-07-11T07:49:31Z" level=debug msg="Filtering disabled container" container=traefik-my-jenkins-pipeline-e32dfad96bee0b9a4022195fd21160d41667a0ba2c58d566845e071e3cb304d4 providerName=docker
+time="2023-07-11T07:49:31Z" level=debug msg="Configuration received from provider docker: {\"http\":{\"routers\":{\"fastapi\":{\"service\":\"backends-my-jenkins-pipeline\",\"rule\":\"Host(`fastapi.docker.localhost`)\",\"tls\":{}}},\"services\":{\"backends-my-jenkins-pipeline\":{\"loadBalancer\":{\"servers\":[{\"url\":\"http://172.19.0.2:3000\"}],\"passHostHeader\":true}}}},\"tcp\":{},\"udp\":{}}" providerName=docker
+time="2023-07-11T07:49:31Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=http routerName=http-to-https@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-07-11T07:49:31Z" level=debug msg="Creating middleware" entryPointName=http routerName=http-to-https@internal middlewareName=redirect-http-to-https@internal middlewareType=RedirectScheme
+time="2023-07-11T07:49:31Z" level=debug msg="Setting up redirection to https 443" middlewareType=RedirectScheme entryPointName=http routerName=http-to-https@internal middlewareName=redirect-http-to-https@internal
+time="2023-07-11T07:49:31Z" level=debug msg="Adding tracing to middleware" entryPointName=http routerName=http-to-https@internal middlewareName=redirect-http-to-https@internal
+time="2023-07-11T07:49:31Z" level=debug msg="Creating middleware" entryPointName=http middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-07-11T07:49:31Z" level=debug msg="Added outgoing tracing middleware api@internal" middlewareType=TracingForwarder routerName=api@internal entryPointName=traefik middlewareName=tracing
+time="2023-07-11T07:49:31Z" level=debug msg="Added outgoing tracing middleware dashboard@internal" entryPointName=traefik routerName=dashboard@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-07-11T07:49:31Z" level=debug msg="Creating middleware" middlewareName=dashboard_stripprefix@internal middlewareType=StripPrefix entryPointName=traefik routerName=dashboard@internal
+time="2023-07-11T07:49:31Z" level=debug msg="Adding tracing to middleware" routerName=dashboard@internal middlewareName=dashboard_stripprefix@internal entryPointName=traefik
+time="2023-07-11T07:49:31Z" level=debug msg="Creating middleware" middlewareType=RedirectRegex routerName=dashboard@internal entryPointName=traefik middlewareName=dashboard_redirect@internal
+time="2023-07-11T07:49:31Z" level=debug msg="Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/" middlewareName=dashboard_redirect@internal middlewareType=RedirectRegex routerName=dashboard@internal entryPointName=traefik
+time="2023-07-11T07:49:31Z" level=debug msg="Adding tracing to middleware" routerName=dashboard@internal middlewareName=dashboard_redirect@internal entryPointName=traefik
+time="2023-07-11T07:49:31Z" level=debug msg="Creating middleware" entryPointName=traefik middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-07-11T07:49:31Z" level=debug msg="No entryPoint defined for this router, using the default one(s) instead: [http https]" routerName=fastapi
+time="2023-07-11T07:49:31Z" level=debug msg="No default certificate, generating one" tlsStoreName=default
+time="2023-07-11T07:49:32Z" level=debug msg="Added outgoing tracing middleware dashboard@internal" middlewareName=tracing middlewareType=TracingForwarder entryPointName=traefik routerName=dashboard@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" entryPointName=traefik routerName=dashboard@internal middlewareType=StripPrefix middlewareName=dashboard_stripprefix@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Adding tracing to middleware" middlewareName=dashboard_stripprefix@internal entryPointName=traefik routerName=dashboard@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" middlewareType=RedirectRegex entryPointName=traefik routerName=dashboard@internal middlewareName=dashboard_redirect@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Setting up redirection from ^(http:\\/\\/(\\[[\\w:.]+\\]|[\\w\\._-]+)(:\\d+)?)\\/$ to ${1}/dashboard/" middlewareName=dashboard_redirect@internal middlewareType=RedirectRegex entryPointName=traefik routerName=dashboard@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Adding tracing to middleware" middlewareName=dashboard_redirect@internal routerName=dashboard@internal entryPointName=traefik
+time="2023-07-11T07:49:32Z" level=debug msg="Added outgoing tracing middleware api@internal" routerName=api@internal middlewareName=tracing middlewareType=TracingForwarder entryPointName=traefik
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=traefik middlewareName=traefik-internal-recovery
+time="2023-07-11T07:49:32Z" level=debug msg="Added outgoing tracing middleware noop@internal" entryPointName=http routerName=http-to-https@internal middlewareName=tracing middlewareType=TracingForwarder
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" middlewareName=redirect-http-to-https@internal middlewareType=RedirectScheme entryPointName=http routerName=http-to-https@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Setting up redirection to https 443" middlewareName=redirect-http-to-https@internal middlewareType=RedirectScheme entryPointName=http routerName=http-to-https@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Adding tracing to middleware" middlewareName=redirect-http-to-https@internal entryPointName=http routerName=http-to-https@internal
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" entryPointName=http middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" middlewareName=pipelining middlewareType=Pipelining entryPointName=http serviceName=backends-my-jenkins-pipeline routerName=fastapi@docker
+time="2023-07-11T07:49:32Z" level=debug msg="Creating load-balancer" routerName=fastapi@docker entryPointName=http serviceName=backends-my-jenkins-pipeline
+time="2023-07-11T07:49:32Z" level=debug msg="Creating server 0 http://172.19.0.2:3000" entryPointName=http serverName=0 serviceName=backends-my-jenkins-pipeline routerName=fastapi@docker
+time="2023-07-11T07:49:32Z" level=debug msg="child http://172.19.0.2:3000 now UP"
+time="2023-07-11T07:49:32Z" level=debug msg="Propagating new UP status"
+time="2023-07-11T07:49:32Z" level=debug msg="Added outgoing tracing middleware backends-my-jenkins-pipeline" routerName=fastapi@docker middlewareName=tracing middlewareType=TracingForwarder entryPointName=http
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" middlewareType=Recovery entryPointName=http middlewareName=traefik-internal-recovery
+time="2023-07-11T07:49:32Z" level=debug msg="Creating middleware" entryPointName=https middlewareName=traefik-internal-recovery middlewareType=Recovery
+time="2023-07-11T07:49:32Z" level=debug msg="Adding route for fastapi.docker.localhost with TLS options default" entryPointName=http
+time="2023-07-11T07:49:32Z" level=debug msg="Adding route for fastapi.docker.localhost with TLS options default" entryPointName=https
+time="2023-07-11T07:49:40Z" level=info msg="I have to go..."
+time="2023-07-11T07:49:40Z" level=info msg="Stopping server gracefully"
+time="2023-07-11T07:49:40Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=http
+time="2023-07-11T07:49:40Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=https
+time="2023-07-11T07:49:40Z" level=error msg="accept tcp [::]:80: use of closed network connection" entryPointName=http
+time="2023-07-11T07:49:40Z" level=error msg="accept tcp [::]:443: use of closed network connection" entryPointName=https
+time="2023-07-11T07:49:40Z" level=debug msg="Waiting 10s seconds before killing connections." entryPointName=traefik
+time="2023-07-11T07:49:40Z" level=error msg="Error while starting server: accept tcp [::]:443: use of closed network connection" entryPointName=https
+time="2023-07-11T07:49:40Z" level=error msg="accept tcp [::]:8080: use of closed network connection" entryPointName=traefik
+time="2023-07-11T07:49:40Z" level=debug msg="Entry point https closed" entryPointName=https
+time="2023-07-11T07:49:40Z" level=error msg="close tcp [::]:80: use of closed network connection" entryPointName=http
+time="2023-07-11T07:49:40Z" level=debug msg="Entry point http closed" entryPointName=http
+time="2023-07-11T07:49:40Z" level=error msg="close tcp [::]:8080: use of closed network connection" entryPointName=traefik
+time="2023-07-11T07:49:40Z" level=debug msg="Entry point traefik closed" entryPointName=traefik
+time="2023-07-11T07:49:40Z" level=info msg="Server stopped"
+time="2023-07-11T07:49:40Z" level=info msg="Shutting down"
